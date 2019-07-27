@@ -1,0 +1,14 @@
+prefix=../fflib/android/armv7-a
+exec_prefix=${prefix}
+libdir=../fflib/android/armv7-a/lib
+includedir=../fflib/android/armv7-a/include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 56.22.100
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil -pthread -lm
+Libs.private: 
+Cflags: -I${includedir}
