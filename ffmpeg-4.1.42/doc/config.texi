@@ -118,7 +118,7 @@
 @c @set have-armv6t2-inline no
 @c @set have-armv8-inline no
 @c @set have-neon-inline no
-@set have-vfp-inline yes
+@c @set have-vfp-inline no
 @c @set have-vfpv3-inline no
 @c @set have-setend-inline no
 @c @set have-altivec-inline no

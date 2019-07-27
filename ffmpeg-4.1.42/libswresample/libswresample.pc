@@ -1,7 +1,7 @@
-prefix=../fflib/android/armv7-a
+prefix=../fflib/android/arm
 exec_prefix=${prefix}
-libdir=../fflib/android/armv7-a/lib
-includedir=../fflib/android/armv7-a/include
+libdir=../fflib/android/arm/lib
+includedir=../fflib/android/arm/include
 
 Name: libswresample
 Description: FFmpeg audio resampling library

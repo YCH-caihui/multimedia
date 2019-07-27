@@ -1,16 +1,20 @@
 # ndk环境
 cd ffmpeg-4.1.42
+CPU=arm
+android=androideabi
+arch=arm
 export NDK=../android-ndk-r17c
-export SYSROOT=$NDK/platforms/android-21/arch-arm
-export TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64
-CPU=armv7-a
+export SYSROOT=$NDK/platforms/android-21/arch-$arch
+export TOOLCHAIN=$NDK/toolchains/$CPU-linux-$android-4.9/prebuilt/darwin-x86_64
+
 
 ISYSROOT=$NDK/sysroot
-ASM=$ISYSROOT/usr/include/arm-linux-androideabi
+ASM=$ISYSROOT/usr/include/$CPU-linux-$android
 
 # 要保存动态库的目录，这里保存在源码根目录下的android/armv7-a
 export PREFIX=../fflib/android/$CPU
-ADDI_CFLAGS="-marm"
+ADDI_CFLAGS="-I$ASM -isysroot $ISYSROOT -D__ANDROID_API__=21 -U_FILE_OFFSET_BITS -Os -fPIC -DANDROID -Wno-deprecated -mfloat-abi=soft"
+ADDI_LDFLAGS=""
 
 # 编译配置详解答
 # 设置编译针对的系统，网上查到很多资料说编译前需要修改configure文件，设置这项后就不用修改了，系统会自动修改，效果一样。
@@ -62,13 +66,13 @@ function build_android
        --disable-avdevice \
        --disable-doc \
        --disable-symver \
-       --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \
-       --cc=$TOOLCHAIN/bin/arm-linux-androideabi-gcc \
-       --nm=$TOOLCHAIN/bin/arm-linux-androideabi-nm \
-       --arch=arm \
+       --cross-prefix=$TOOLCHAIN/bin/$CPU-linux-$android- \
+       --cc=$TOOLCHAIN/bin/$CPU-linux-$android-gcc \
+       --nm=$TOOLCHAIN/bin/$CPU-linux-$android-nm \
+       --arch=$CPU \
        --sysroot=$SYSROOT \
-       --extra-cflags="-I$ASM -isysroot $ISYSROOT -D__ANDROID_API__=21 -U_FILE_OFFSET_BITS -Os -fPIC -DANDROID -Wno-deprecated -mfloat-abi=softfp -marm" \
-       --extra-ldflags="$ADDI_LDFLAGS" \
+       --extra-cflags=$ADDI_CFLAGS \
+       --extra-ldflags=$ADDI_LDFLAGS \
        $ADDITIONAL_CONFIGURE_FLAG
 
    make clean
@@ -84,7 +88,7 @@ function merge
    echo -e "\033[32m package start \033[0m"
 
    # 打包
-   $TOOLCHAIN/bin/arm-linux-androideabi-ld \
+   $TOOLCHAIN/bin/$CPU-linux-$android-ld \
        -rpath-link=$SYSROOT/usr/lib \
        -L$SYSROOT/usr/lib \
        -L$PREFIX/lib \
@@ -97,11 +101,11 @@ function merge
        libswresample/libswresample.a \
        libswscale/libswscale.a \
        -lc -lm -lz -ldl -llog --dynamic-linker=/system/bin/linker \
-       $TOOLCHAIN/lib/gcc/arm-linux-androideabi/4.9.x/libgcc.a
+       $TOOLCHAIN/lib/gcc/$CPU-linux-$android/4.9.x/libgcc.a
 
    # strip 精简文件
-   $TOOLCHAIN/bin/arm-linux-androideabi-strip  $PREFIX/libffmpeg.so
-
+   $TOOLCHAIN/bin/$CPU-linux-$android-strip  $PREFIX/libffmpeg.so
+  
    echo -e "\033[32m package successful \033[0m"
 }
 
