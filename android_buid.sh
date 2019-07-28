@@ -1,10 +1,11 @@
 # ndk环境
 cd ffmpeg-4.1.42
-CPU=arm
-android=androideabi
-arch=arm
+CPU=aarch64
+ABI=arm64-v8a  #arm64-v8a  armeabi-v7a x86 x86_64
+android=android
+ARCH=arm64  #arm  arm64 x86 x86_64
 export NDK=../android-ndk-r17c
-export SYSROOT=$NDK/platforms/android-21/arch-$arch
+export SYSROOT=$NDK/platforms/android-21/arch-$ARCH
 export TOOLCHAIN=$NDK/toolchains/$CPU-linux-$android-4.9/prebuilt/darwin-x86_64
 
 
@@ -12,8 +13,9 @@ ISYSROOT=$NDK/sysroot
 ASM=$ISYSROOT/usr/include/$CPU-linux-$android
 
 # 要保存动态库的目录，这里保存在源码根目录下的android/armv7-a
-export PREFIX=../fflib/android/$CPU
-ADDI_CFLAGS="-I$ASM -isysroot $ISYSROOT -D__ANDROID_API__=21 -U_FILE_OFFSET_BITS -Os -fPIC -DANDROID -Wno-deprecated -mfloat-abi=soft"
+export PREFIX=../fflib/android/$ABI
+#"-I$ASM -isysroot $ISYSROOT -D__ANDROID_API__=21 -U_FILE_OFFSET_BITS -Os -fPIC -DANDROID -Wno-deprecated -mfloat-abi=soft"
+ADDI_CFLAGS="-march=armv8-a -isysroot $ISYSROOT -D__ANDROID_API__=21 -U_FILE_OFFSET_BITS -Os -fPIC -DANDROID -Wno-deprecated"
 ADDI_LDFLAGS=""
 
 # 编译配置详解答
@@ -71,8 +73,8 @@ function build_android
        --nm=$TOOLCHAIN/bin/$CPU-linux-$android-nm \
        --arch=$CPU \
        --sysroot=$SYSROOT \
-       --extra-cflags=$ADDI_CFLAGS \
-       --extra-ldflags=$ADDI_LDFLAGS \
+       --extra-cflags="${ADDI_CFLAGS} -I$ASM" \
+       --extra-ldflags=${ADDI_LDFLAGS} \
        $ADDITIONAL_CONFIGURE_FLAG
 
    make clean
