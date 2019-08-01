@@ -52,10 +52,12 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../QTFFmpeg/h264decoder.cpp \
+SOURCES       = ../QTFFmpeg/cameraclient.cpp \
+		../QTFFmpeg/h264decoder.cpp \
 		../QTFFmpeg/main.cpp \
 		../QTFFmpeg/mainwindow.cpp moc_mainwindow.cpp
-OBJECTS       = h264decoder.o \
+OBJECTS       = cameraclient.o \
+		h264decoder.o \
 		main.o \
 		mainwindow.o \
 		moc_mainwindow.o
@@ -253,8 +255,10 @@ DIST          = /Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/spec
 		/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/exceptions.prf \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/yacc.prf \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/lex.prf \
-		../QTFFmpeg/QTFFmpeg.pro ../QTFFmpeg/h264decoder.h \
-		../QTFFmpeg/mainwindow.h ../QTFFmpeg/h264decoder.cpp \
+		../QTFFmpeg/QTFFmpeg.pro ../QTFFmpeg/cameraclient.h \
+		../QTFFmpeg/h264decoder.h \
+		../QTFFmpeg/mainwindow.h ../QTFFmpeg/cameraclient.cpp \
+		../QTFFmpeg/h264decoder.cpp \
 		../QTFFmpeg/main.cpp \
 		../QTFFmpeg/mainwindow.cpp
 QMAKE_TARGET  = QTFFmpeg
@@ -708,8 +712,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QTFFmpeg/h264decoder.h ../QTFFmpeg/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../QTFFmpeg/h264decoder.cpp ../QTFFmpeg/main.cpp ../QTFFmpeg/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../QTFFmpeg/cameraclient.h ../QTFFmpeg/h264decoder.h ../QTFFmpeg/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../QTFFmpeg/cameraclient.cpp ../QTFFmpeg/h264decoder.cpp ../QTFFmpeg/main.cpp ../QTFFmpeg/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../QTFFmpeg/mainwindow.ui $(DISTDIR)/
 
 
@@ -778,20 +782,8 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-h264decoder.o: ../QTFFmpeg/h264decoder.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o h264decoder.o ../QTFFmpeg/h264decoder.cpp
-
-main.o: ../QTFFmpeg/main.cpp ../QTFFmpeg/mainwindow.h \
-		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QTFFmpeg/main.cpp
-
-mainwindow.o: ../QTFFmpeg/mainwindow.cpp ../QTFFmpeg/mainwindow.h \
-		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_mainwindow.h \
+cameraclient.o: ../QTFFmpeg/cameraclient.cpp ../QTFFmpeg/cameraclient.h \
+		../QTFFmpeg/h264decoder.h \
 		../../../fflib/pc/include/libavcodec/avcodec.h \
 		../../../fflib/pc/include/libavutil/samplefmt.h \
 		../../../fflib/pc/include/libavutil/avutil.h \
@@ -814,6 +806,209 @@ mainwindow.o: ../QTFFmpeg/mainwindow.cpp ../QTFFmpeg/mainwindow.h \
 		../../../fflib/pc/include/libavutil/dict.h \
 		../../../fflib/pc/include/libavutil/frame.h \
 		../../../fflib/pc/include/libavutil/hwcontext.h \
+		../../../fflib/pc/include/libavfilter/avfilter.h \
+		../../../fflib/pc/include/libavfilter/version.h \
+		../../../fflib/pc/include/libswscale/swscale.h \
+		../../../fflib/pc/include/libavformat/avformat.h \
+		../../../fflib/pc/include/libavformat/avio.h \
+		../../../fflib/pc/include/libavformat/version.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cameraclient.o ../QTFFmpeg/cameraclient.cpp
+
+h264decoder.o: ../QTFFmpeg/h264decoder.cpp ../QTFFmpeg/h264decoder.h \
+		../../../fflib/pc/include/libavcodec/avcodec.h \
+		../../../fflib/pc/include/libavutil/samplefmt.h \
+		../../../fflib/pc/include/libavutil/avutil.h \
+		../../../fflib/pc/include/libavutil/common.h \
+		../../../fflib/pc/include/libavutil/attributes.h \
+		../../../fflib/pc/include/libavutil/macros.h \
+		../../../fflib/pc/include/libavcodec/version.h \
+		../../../fflib/pc/include/libavutil/version.h \
+		../../../fflib/pc/include/libavutil/avconfig.h \
+		../../../fflib/pc/include/libavutil/mem.h \
+		../../../fflib/pc/include/libavutil/error.h \
+		../../../fflib/pc/include/libavutil/rational.h \
+		../../../fflib/pc/include/libavutil/mathematics.h \
+		../../../fflib/pc/include/libavutil/intfloat.h \
+		../../../fflib/pc/include/libavutil/log.h \
+		../../../fflib/pc/include/libavutil/pixfmt.h \
+		../../../fflib/pc/include/libavutil/buffer.h \
+		../../../fflib/pc/include/libavutil/cpu.h \
+		../../../fflib/pc/include/libavutil/channel_layout.h \
+		../../../fflib/pc/include/libavutil/dict.h \
+		../../../fflib/pc/include/libavutil/frame.h \
+		../../../fflib/pc/include/libavutil/hwcontext.h \
+		../../../fflib/pc/include/libavfilter/avfilter.h \
+		../../../fflib/pc/include/libavfilter/version.h \
+		../../../fflib/pc/include/libswscale/swscale.h \
+		../../../fflib/pc/include/libavformat/avformat.h \
+		../../../fflib/pc/include/libavformat/avio.h \
+		../../../fflib/pc/include/libavformat/version.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o h264decoder.o ../QTFFmpeg/h264decoder.cpp
+
+main.o: ../QTFFmpeg/main.cpp ../QTFFmpeg/mainwindow.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QtWidgets \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtwidgetsglobal.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qabstractbutton.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qabstractitemdelegate.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qabstractitemview.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qabstractscrollarea.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qabstractslider.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qabstractspinbox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qaccessiblewidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qactiongroup.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qbuttongroup.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcalendarwidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcolormap.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcolumnview.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcombobox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcommandlinkbutton.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcommonstyle.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qcompleter.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdatawidgetmapper.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdial.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdialogbuttonbox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdirmodel.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdrawutil.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qerrormessage.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qfileiconprovider.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qfilesystemmodel.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qfocusframe.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qfontcombobox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qfontdialog.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qformlayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgesture.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgesturerecognizer.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicsanchorlayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicseffect.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicsgridlayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitemanimation.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicslayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicslayoutitem.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicslinearlayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicsproxywidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicssceneevent.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicstransform.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgraphicswidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qheaderview.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qinputdialog.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qitemeditorfactory.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qkeyeventtransition.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qkeysequenceedit.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qlayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qlayoutitem.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qlistview.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmdiarea.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmdisubwindow.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmenu.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmenubar.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmouseeventtransition.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qopenglwidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qprogressbar.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qprogressdialog.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qproxystyle.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qradiobutton.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qrubberband.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qscrollarea.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qscrollbar.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qscroller.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qscrollerproperties.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qshortcut.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qsizegrip.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qsizepolicy.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qspinbox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qsplashscreen.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qsplitter.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstackedlayout.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstackedwidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstatusbar.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstyle.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstyleditemdelegate.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstylefactory.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstyleoption.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstylepainter.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qstyleplugin.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qsystemtrayicon.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtabbar.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtableview.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtabwidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtextbrowser.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtoolbar.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtoolbox.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtoolbutton.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtooltip.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtreeview.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtreewidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtreewidgetitemiterator.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qundogroup.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qundostack.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qundoview.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qwhatsthis.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qwidgetaction.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qwizard.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qtwidgetsversion.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QTFFmpeg/main.cpp
+
+mainwindow.o: ../QTFFmpeg/mainwindow.cpp ../QTFFmpeg/mainwindow.h \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_mainwindow.h \
+		../QTFFmpeg/h264decoder.h \
+		../../../fflib/pc/include/libavcodec/avcodec.h \
+		../../../fflib/pc/include/libavutil/samplefmt.h \
+		../../../fflib/pc/include/libavutil/avutil.h \
+		../../../fflib/pc/include/libavutil/common.h \
+		../../../fflib/pc/include/libavutil/attributes.h \
+		../../../fflib/pc/include/libavutil/macros.h \
+		../../../fflib/pc/include/libavcodec/version.h \
+		../../../fflib/pc/include/libavutil/version.h \
+		../../../fflib/pc/include/libavutil/avconfig.h \
+		../../../fflib/pc/include/libavutil/mem.h \
+		../../../fflib/pc/include/libavutil/error.h \
+		../../../fflib/pc/include/libavutil/rational.h \
+		../../../fflib/pc/include/libavutil/mathematics.h \
+		../../../fflib/pc/include/libavutil/intfloat.h \
+		../../../fflib/pc/include/libavutil/log.h \
+		../../../fflib/pc/include/libavutil/pixfmt.h \
+		../../../fflib/pc/include/libavutil/buffer.h \
+		../../../fflib/pc/include/libavutil/cpu.h \
+		../../../fflib/pc/include/libavutil/channel_layout.h \
+		../../../fflib/pc/include/libavutil/dict.h \
+		../../../fflib/pc/include/libavutil/frame.h \
+		../../../fflib/pc/include/libavutil/hwcontext.h \
+		../../../fflib/pc/include/libavfilter/avfilter.h \
+		../../../fflib/pc/include/libavfilter/version.h \
+		../../../fflib/pc/include/libswscale/swscale.h \
 		../../../fflib/pc/include/libavformat/avformat.h \
 		../../../fflib/pc/include/libavformat/avio.h \
 		../../../fflib/pc/include/libavformat/version.h

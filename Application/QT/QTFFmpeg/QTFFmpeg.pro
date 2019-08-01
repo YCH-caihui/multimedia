@@ -61,11 +61,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        cameraclient.cpp \
         h264decoder.cpp \
         main.cpp \
         mainwindow.cpp
 
 HEADERS += \
+        cameraclient.h \
         h264decoder.h \
         mainwindow.h
 

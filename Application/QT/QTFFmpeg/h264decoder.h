@@ -12,7 +12,7 @@ typedef struct rgbDataDefine
     int width;
     int height;
     int bufferSize;
-    char * dateBuffer;
+    unsigned char * dataBuffer;
 }RGBData_Define;
 
 class H264Decoder
