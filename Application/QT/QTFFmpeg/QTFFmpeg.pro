@@ -68,6 +68,7 @@ SOURCES += \
 
 HEADERS += \
         cameraclient.h \
+        cctcpdatadefine.h \
         h264decoder.h \
         mainwindow.h
 

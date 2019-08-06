@@ -256,6 +256,7 @@ DIST          = /Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/spec
 		/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/yacc.prf \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/lex.prf \
 		../QTFFmpeg/QTFFmpeg.pro ../QTFFmpeg/cameraclient.h \
+		../QTFFmpeg/cctcpdatadefine.h \
 		../QTFFmpeg/h264decoder.h \
 		../QTFFmpeg/mainwindow.h ../QTFFmpeg/cameraclient.cpp \
 		../QTFFmpeg/h264decoder.cpp \
@@ -712,7 +713,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QTFFmpeg/cameraclient.h ../QTFFmpeg/h264decoder.h ../QTFFmpeg/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../QTFFmpeg/cameraclient.h ../QTFFmpeg/cctcpdatadefine.h ../QTFFmpeg/h264decoder.h ../QTFFmpeg/mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../QTFFmpeg/cameraclient.cpp ../QTFFmpeg/h264decoder.cpp ../QTFFmpeg/main.cpp ../QTFFmpeg/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../QTFFmpeg/mainwindow.ui $(DISTDIR)/
 
@@ -755,6 +756,36 @@ compiler_moc_header_clean:
 moc_mainwindow.cpp: ../QTFFmpeg/mainwindow.h \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../QTFFmpeg/cameraclient.h \
+		../QTFFmpeg/h264decoder.h \
+		../../../fflib/pc/include/libavcodec/avcodec.h \
+		../../../fflib/pc/include/libavutil/samplefmt.h \
+		../../../fflib/pc/include/libavutil/avutil.h \
+		../../../fflib/pc/include/libavutil/common.h \
+		../../../fflib/pc/include/libavutil/attributes.h \
+		../../../fflib/pc/include/libavutil/macros.h \
+		../../../fflib/pc/include/libavcodec/version.h \
+		../../../fflib/pc/include/libavutil/version.h \
+		../../../fflib/pc/include/libavutil/avconfig.h \
+		../../../fflib/pc/include/libavutil/mem.h \
+		../../../fflib/pc/include/libavutil/error.h \
+		../../../fflib/pc/include/libavutil/rational.h \
+		../../../fflib/pc/include/libavutil/mathematics.h \
+		../../../fflib/pc/include/libavutil/intfloat.h \
+		../../../fflib/pc/include/libavutil/log.h \
+		../../../fflib/pc/include/libavutil/pixfmt.h \
+		../../../fflib/pc/include/libavutil/buffer.h \
+		../../../fflib/pc/include/libavutil/cpu.h \
+		../../../fflib/pc/include/libavutil/channel_layout.h \
+		../../../fflib/pc/include/libavutil/dict.h \
+		../../../fflib/pc/include/libavutil/frame.h \
+		../../../fflib/pc/include/libavutil/hwcontext.h \
+		../../../fflib/pc/include/libavfilter/avfilter.h \
+		../../../fflib/pc/include/libavfilter/version.h \
+		../../../fflib/pc/include/libswscale/swscale.h \
+		../../../fflib/pc/include/libavformat/avformat.h \
+		../../../fflib/pc/include/libavformat/avio.h \
+		../../../fflib/pc/include/libavformat/version.h \
 		moc_predefs.h \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/bin/moc
 	/Volumes/apple/Software/qt/5.13.0/clang_64/bin/moc $(DEFINES) --include /Users/linus/Documents/Develop/Code/Github/multimedia/Application/QT/build-QTFFmpeg-Desktop_Qt_5_13_0_clang_64bit-Debug/moc_predefs.h -I/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/macx-clang -I/Users/linus/Documents/Develop/Code/Github/multimedia/Application/QT/QTFFmpeg -I/Users/linus/Documents/Develop/Code/Github/multimedia/fflib/pc/include -I/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtOpenGL.framework/Headers -I/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers -I/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtGui.framework/Headers -I/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.1/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Volumes/apple/Software/qt/5.13.0/clang_64/lib ../QTFFmpeg/mainwindow.h -o moc_mainwindow.cpp
@@ -848,6 +879,36 @@ h264decoder.o: ../QTFFmpeg/h264decoder.cpp ../QTFFmpeg/h264decoder.h \
 main.o: ../QTFFmpeg/main.cpp ../QTFFmpeg/mainwindow.h \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../QTFFmpeg/cameraclient.h \
+		../QTFFmpeg/h264decoder.h \
+		../../../fflib/pc/include/libavcodec/avcodec.h \
+		../../../fflib/pc/include/libavutil/samplefmt.h \
+		../../../fflib/pc/include/libavutil/avutil.h \
+		../../../fflib/pc/include/libavutil/common.h \
+		../../../fflib/pc/include/libavutil/attributes.h \
+		../../../fflib/pc/include/libavutil/macros.h \
+		../../../fflib/pc/include/libavcodec/version.h \
+		../../../fflib/pc/include/libavutil/version.h \
+		../../../fflib/pc/include/libavutil/avconfig.h \
+		../../../fflib/pc/include/libavutil/mem.h \
+		../../../fflib/pc/include/libavutil/error.h \
+		../../../fflib/pc/include/libavutil/rational.h \
+		../../../fflib/pc/include/libavutil/mathematics.h \
+		../../../fflib/pc/include/libavutil/intfloat.h \
+		../../../fflib/pc/include/libavutil/log.h \
+		../../../fflib/pc/include/libavutil/pixfmt.h \
+		../../../fflib/pc/include/libavutil/buffer.h \
+		../../../fflib/pc/include/libavutil/cpu.h \
+		../../../fflib/pc/include/libavutil/channel_layout.h \
+		../../../fflib/pc/include/libavutil/dict.h \
+		../../../fflib/pc/include/libavutil/frame.h \
+		../../../fflib/pc/include/libavutil/hwcontext.h \
+		../../../fflib/pc/include/libavfilter/avfilter.h \
+		../../../fflib/pc/include/libavfilter/version.h \
+		../../../fflib/pc/include/libswscale/swscale.h \
+		../../../fflib/pc/include/libavformat/avformat.h \
+		../../../fflib/pc/include/libavformat/avio.h \
+		../../../fflib/pc/include/libavformat/version.h \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QtWidgets \
@@ -982,7 +1043,7 @@ main.o: ../QTFFmpeg/main.cpp ../QTFFmpeg/mainwindow.h \
 mainwindow.o: ../QTFFmpeg/mainwindow.cpp ../QTFFmpeg/mainwindow.h \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_mainwindow.h \
+		../QTFFmpeg/cameraclient.h \
 		../QTFFmpeg/h264decoder.h \
 		../../../fflib/pc/include/libavcodec/avcodec.h \
 		../../../fflib/pc/include/libavutil/samplefmt.h \
@@ -1011,7 +1072,8 @@ mainwindow.o: ../QTFFmpeg/mainwindow.cpp ../QTFFmpeg/mainwindow.h \
 		../../../fflib/pc/include/libswscale/swscale.h \
 		../../../fflib/pc/include/libavformat/avformat.h \
 		../../../fflib/pc/include/libavformat/avio.h \
-		../../../fflib/pc/include/libavformat/version.h
+		../../../fflib/pc/include/libavformat/version.h \
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../QTFFmpeg/mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
