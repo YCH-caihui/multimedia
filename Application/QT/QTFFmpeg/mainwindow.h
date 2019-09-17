@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "cameraclient.h"
+#include <QDebug>
 
 namespace Ui {
 class MainWindow;

@@ -7,6 +7,8 @@ extern "C"{
 #include "libavformat/avformat.h"
 }
 
+#include<QDebug>
+
 typedef struct rgbDataDefine
 {
     int width;

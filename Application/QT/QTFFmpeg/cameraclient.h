@@ -2,6 +2,7 @@
 #define CAMERACLIENT_H
 #include "cctcpdatadefine.h"
 #include "h264decoder.h"
+#include <QDebug>
 typedef void (*UpdateVideo2GUI_Callback)(RGBData_Define * rgbData, unsigned long userData);
 class cameraclient
 {
@@ -12,6 +13,15 @@ public:
     bool startTCPSocketConnection(CC_NetConnectInfo * connectionInfo);
     bool stopTCPSocketClient();
     void setUpdateGUICallback(UpdateVideo2GUI_Callback callback, unsigned long userData);
+    int detachThreadCreate(pthread_t * thread, void * start_routine, void * arg);
+
+    void doLoginAuthentication();
+    bool sendUserLoginRequest();
+
+    bool sendCSocketData(char * pBuf, int aLength);
+    bool recvCSocketData(char * pBuf, int aLength);
+
+    int recvUserLoginReply();
 
 private:  char                        m_IPAdress[64];                 //camIP
     int                         m_port;                       //端口
@@ -38,6 +48,8 @@ private:  char                        m_IPAdress[64];                 //camIP
     UpdateVideo2GUI_Callback m_updateVideoCallback;
 
     int initTCPSocketConnection(CC_NetConnectInfo * connecttionInfo);
+
+    static void* doLoginAuthenticationThread(void* arg);
 };
 
 #endif // CAMERACLIENT_H

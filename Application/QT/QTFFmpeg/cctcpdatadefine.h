@@ -28,6 +28,7 @@
 #include <ifaddrs.h>
 #include <errno.h>
 #include <netdb.h>
+#include <QDebug>
 
 
 #define         CONTROLCODE_LOGIN_REQUEST                       0

@@ -9,6 +9,7 @@ H264Decoder::H264Decoder()
    pictureWidth = 0;
    setRecordREsolveState = 0;
 
+   //找到对应的解码器
    pCodec = avcodec_find_decoder(AV_CODEC_ID_H264);
    if(!pCodec)
    {
@@ -22,8 +23,10 @@ H264Decoder::H264Decoder()
        std::cout << "alloc codec ctx failed " << std::endl;
    }
 
+   //打开解码器
    avcodec_open2(pCodecCtx, pCodec, nullptr);
-   pVideoFrame = av_frame_alloc();
+   pVideoFrame = av_frame_alloc(); //解码之后的数据
+
    avpicture_alloc(&outPicture, AV_PIX_FMT_RGB24, 640, 360);
 
 }
