@@ -15,13 +15,13 @@ include_directories(${in_src_DIR})
 # Gradle automatically packages shared libraries with your APK.
 
 add_library( # Sets the name of the library.
-             native-lib
+             dataClient-lib
 
              # Sets the library as a shared library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             native-lib.cpp )
+             native-lib.cpp dataCline.cpp)
 include_directories()
 message("CURRENT_DIR:" ${in_src_DIR})
 # Searches for a specified prebuilt library and stores the path as a
@@ -46,4 +46,4 @@ set_target_properties(ffmpeg-lib PROPERTIES IMPORTED_LOCATION
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
-target_link_libraries(native-lib ffmpeg-lib ${log-lib})
+target_link_libraries(dataClient-lib ffmpeg-lib ${log-lib})
