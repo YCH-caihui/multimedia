@@ -248,7 +248,8 @@ DIST          = /Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/spec
 		/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/exceptions.prf \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/yacc.prf \
 		/Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/lex.prf \
-		../SIOTCamera/SIOTCamera.pro ../SIOTCamera/socketserver.h ../SIOTCamera/main.cpp \
+		../SIOTCamera/SIOTCamera.pro ../SIOTCamera/msgdefine.h \
+		../SIOTCamera/socketserver.h ../SIOTCamera/main.cpp \
 		../SIOTCamera/socketserver.cpp
 QMAKE_TARGET  = SIOTCamera
 DESTDIR       = 
@@ -675,7 +676,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Volumes/apple/Software/qt/5.13.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../SIOTCamera/socketserver.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../SIOTCamera/msgdefine.h ../SIOTCamera/socketserver.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../SIOTCamera/main.cpp ../SIOTCamera/socketserver.cpp $(DISTDIR)/
 
 
