@@ -82,23 +82,23 @@
 @c @set have-power8-external no
 @c @set have-ppc4xx-external no
 @c @set have-vsx-external no
-@set have-aesni-external yes
-@set have-amd3dnow-external yes
-@set have-amd3dnowext-external yes
-@set have-avx-external yes
-@set have-avx2-external yes
+@c @set have-aesni-external no
+@c @set have-amd3dnow-external no
+@c @set have-amd3dnowext-external no
+@c @set have-avx-external no
+@c @set have-avx2-external no
 @c @set have-avx512-external no
-@set have-fma3-external yes
-@set have-fma4-external yes
-@set have-mmx-external yes
-@set have-mmxext-external yes
-@set have-sse-external yes
-@set have-sse2-external yes
-@set have-sse3-external yes
-@set have-sse4-external yes
-@set have-sse42-external yes
-@set have-ssse3-external yes
-@set have-xop-external yes
+@c @set have-fma3-external no
+@c @set have-fma4-external no
+@c @set have-mmx-external no
+@c @set have-mmxext-external no
+@c @set have-sse-external no
+@c @set have-sse2-external no
+@c @set have-sse3-external no
+@c @set have-sse4-external no
+@c @set have-sse42-external no
+@c @set have-ssse3-external no
+@c @set have-xop-external no
 @c @set have-cpunop-external no
 @c @set have-i686-external no
 @c @set have-mipsfpu-external no
@@ -176,8 +176,8 @@
 @set have-cabs yes
 @set have-cexp yes
 @set have-inline-asm yes
-@c @set have-symver no
-@set have-x86asm yes
+@set have-symver yes
+@c @set have-x86asm no
 @c @set have-bigendian no
 @set have-fast-unaligned yes
 @set have-arpa-inet-h yes
@@ -358,9 +358,9 @@
 @c @set have-opencl-vaapi-intel-media no
 @set have-perl yes
 @set have-pod2man yes
-@set have-texi2html yes
+@c @set have-texi2html no
 @c @set config-doc no
-@set config-htmlpages yes
+@c @set config-htmlpages no
 @set config-manpages yes
 @set config-podpages yes
 @set config-txtpages yes
@@ -485,7 +485,7 @@
 @c @set config-libxcb-xfixes no
 @c @set config-lzma no
 @c @set config-schannel no
-@set config-sdl2 yes
+@c @set config-sdl2 no
 @set config-securetransport yes
 @c @set config-sndio no
 @c @set config-xlib no
@@ -524,7 +524,7 @@
 @c @set config-gpl no
 @c @set config-nonfree no
 @c @set config-version3 no
-@c @set config-avdevice no
+@set config-avdevice yes
 @set config-avfilter yes
 @set config-swscale yes
 @c @set config-postproc no
@@ -534,8 +534,8 @@
 @c @set config-avresample no
 @set config-avutil yes
 @c @set config-ffplay no
-@c @set config-ffprobe no
-@c @set config-ffmpeg no
+@set config-ffprobe yes
+@set config-ffmpeg yes
 @set config-dct yes
 @set config-dwt yes
 @set config-error-resilience yes
@@ -563,7 +563,7 @@
 @set config-encoders yes
 @set config-hwaccels yes
 @set config-parsers yes
-@c @set config-indevs no
+@set config-indevs yes
 @c @set config-outdevs no
 @set config-filters yes
 @set config-demuxers yes
@@ -1507,7 +1507,7 @@
 @set config-xma-parser yes
 @c @set config-alsa-indev no
 @c @set config-android-camera-indev no
-@c @set config-avfoundation-indev no
+@set config-avfoundation-indev yes
 @c @set config-bktr-indev no
 @c @set config-decklink-indev no
 @c @set config-libndi-newtek-indev no
@@ -1517,7 +1517,7 @@
 @c @set config-iec61883-indev no
 @c @set config-jack-indev no
 @c @set config-kmsgrab-indev no
-@c @set config-lavfi-indev no
+@set config-lavfi-indev yes
 @c @set config-openal-indev no
 @c @set config-oss-indev no
 @c @set config-pulse-indev no

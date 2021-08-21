@@ -10,6 +10,7 @@ function build_pc
        --disable-static \
        --enable-shared \
        --disable-doc \
+       --disable-yasm \
        --disable-ffmpeg \
        --disable-ffplay \
        --disable-ffprobe \

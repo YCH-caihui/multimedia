@@ -11,10 +11,10 @@ DEPENDPATH += $$PWD/../../../FFmpeg/fflib/pc/lib
 macx{
  message("=====build  macx======")
  LIBS += -L$$PWD/../../../FFmpeg/fflib/pc/lib/ -lavformat.58.20.100
- LIBS += -L$$PWD/../../../FFmpeg/fflib/pc/lib/ -lavutil.56.22.100
- LIBS += -L$$PWD/../../../FFmpeg/fflib/pc/lib/ -lavcodec.58.35.100
- LIBS += -L$$PWD/../../../FFmpeg/fflib/pc/lib/ -lswresample.3.3.100
- LIBS += -L$$PWD/../../../FFmpeg/fflib/pc/lib/ -lswscale.5.3.100
+ LIBS += -lavutil.56.22.100
+ LIBS += -lavcodec.58.35.100
+ LIBS += -lswresample.3.3.100
+ LIBS += -lswscale.5.3.100
 
 }
 
