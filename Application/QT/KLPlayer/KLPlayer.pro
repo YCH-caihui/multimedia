@@ -25,10 +25,12 @@ macx{
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    xdecode.cpp \
     xdemux.cpp
 
 HEADERS += \
     mainwindow.h \
+    xdecode.h \
     xdemux.h
 
 FORMS += \

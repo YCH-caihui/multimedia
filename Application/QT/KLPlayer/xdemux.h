@@ -37,6 +37,8 @@ public:
     //seek 位置 pos 0.0~1.0
     virtual bool seek(double pos);
 
+    virtual void clear();
+    virtual void close();
 
     XDemux();
     virtual ~XDemux();

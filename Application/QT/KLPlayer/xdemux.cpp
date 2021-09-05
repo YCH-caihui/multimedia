@@ -125,6 +125,32 @@ bool XDemux::seek(double pos)
 
 }
 
+
+void XDemux::clear()
+{
+ mux.lock();
+ if(!ic)
+ {
+     mux.unlock();
+     return;
+ }
+ avformat_flush(ic);
+ mux.unlock();
+}
+
+void XDemux::close()
+{
+    mux.lock();
+    if(!ic)
+    {
+        mux.unlock();
+        return;
+    }
+    avformat_close_input(&ic);
+
+    mux.unlock();
+}
+
 XDemux::XDemux()
 {
 
