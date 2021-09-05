@@ -24,6 +24,20 @@ protected:
 public:
     //打开媒体文件，或者流媒体rtmp http rstp
     virtual bool open(const char * url);
+
+    //空间需要调用者释放，释放AVPacket 对象空间和数据空间
+    virtual AVPacket * read();
+
+    //获取视频参数
+    AVCodecParameters * copyVPara();
+
+    //获取音频参数
+    AVCodecParameters * copyAPara();
+
+    //seek 位置 pos 0.0~1.0
+    virtual bool seek(double pos);
+
+
     XDemux();
     virtual ~XDemux();
 };
