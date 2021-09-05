@@ -43,6 +43,44 @@ bool XDecode::open(AVCodecParameters *para)
 }
 
 
+bool XDecode::send(AVPacket *pkt)
+{
+    //容错处理
+    if(!pkt || pkt->size <= 0  || !pkt->data) return false;
+    mux.lock();
+    if(!codecContext)
+    {
+        mux.unlock();
+        return false;
+    }
+    int re = avcodec_send_packet(codecContext, pkt);
+    mux.unlock();
+    av_packet_free(&pkt);
+    if(re != 0) return false;
+    return true;
+}
+
+AVFrame* XDecode::recv()
+{
+    mux.lock();
+    if(!codecContext)
+    {
+        mux.unlock();
+        return 0;
+    }
+    AVFrame * frame = av_frame_alloc();
+    int re = avcodec_receive_frame(codecContext, frame);
+     mux.unlock();
+    if(re != 0)
+    {
+        av_frame_free(&frame);
+        return nullptr;
+    }
+
+    return frame;
+
+}
+
 void XDecode::close()
 {
     mux.lock();

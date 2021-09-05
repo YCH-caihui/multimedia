@@ -69,7 +69,7 @@ AVPacket * XDemux::read()
     pkt->dts = pkt->dts * (1000 * (r2d(ic->streams[pkt->stream_index]->time_base)));
 
     mux.unlock();
-    cout << "packet pts:" << pkt->pts << endl;
+ //   cout << "packet pts:" << pkt->pts << endl;
     return pkt;
 }
 
@@ -125,6 +125,16 @@ bool XDemux::seek(double pos)
 
 }
 
+
+bool XDemux::isAudio(AVPacket *pkt)
+{
+    if(!pkt)return false;
+    if(pkt->stream_index == videoStream)
+    {
+        return false;
+    }
+    return true;
+}
 
 void XDemux::clear()
 {

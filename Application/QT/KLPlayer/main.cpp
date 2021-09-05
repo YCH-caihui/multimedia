@@ -10,21 +10,36 @@ int main(int argc, char *argv[])
     XDemux demux;
     demux.open("/Users/ych-caihui/Movies/a.flv");
 
-    XDecode decode;
-    std::cout << "vdecode.open() =" << decode.open(demux.copyVPara()) << std::endl;
-    decode.clear();
-    decode.close();
-    std::cout << "adecode.open() =" << decode.open(demux.copyAPara()) << std::endl;
+    XDecode vDecode;
+    std::cout << "vdecode.open() =" << vDecode.open(demux.copyVPara()) << std::endl;
 
-//    for(;;)
-//    {
-//        AVPacket * pkt = dumux.read();
-//        if(!pkt)
-//        {
-//            cout << "结束了" << endl;
-//            break;
-//        }
-//    }
+    XDecode aDecode;
+    std::cout << "adecode.open() =" << aDecode.open(demux.copyAPara()) << std::endl;
+
+    for(;;)
+    {
+        AVPacket * pkt = demux.read();
+
+        if(!pkt)
+        {
+            cout << "结束了" << endl;
+            break;
+        }
+        if(demux.isAudio(pkt))
+        {
+            aDecode.send(pkt);
+            AVFrame * aFrame = aDecode.recv();
+            cout << "Audio:" << aFrame << endl;
+
+        }
+        else
+        {
+            vDecode.send(pkt);
+            AVFrame * vFrame = vDecode.recv();
+            cout << "Video:" << vFrame << endl;
+
+        }
+    }
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
