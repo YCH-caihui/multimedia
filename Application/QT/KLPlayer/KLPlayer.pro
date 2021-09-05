@@ -24,10 +24,12 @@ macx{
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    xdemux.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    xdemux.h
 
 FORMS += \
     mainwindow.ui
