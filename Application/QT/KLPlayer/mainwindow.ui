@@ -17,10 +17,10 @@
    <widget class="XVideoWidget" name="video">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>0</x>
       <y>0</y>
-      <width>621</width>
-      <height>371</height>
+      <width>1280</width>
+      <height>720</height>
      </rect>
     </property>
    </widget>

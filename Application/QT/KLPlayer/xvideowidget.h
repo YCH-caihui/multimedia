@@ -42,13 +42,13 @@ public:
 
 protected:
     //刷新显示
-    void painGL();
+    void paintGL() override;
 
     //初始化gl
-    void initializeGL();
+    void initializeGL() override;
 
     //窗口尺寸变化
-    void resizeGL(int width, int height);
+    void resizeGL(int width, int height) override;
 
 
 };

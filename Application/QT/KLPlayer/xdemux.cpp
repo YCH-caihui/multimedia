@@ -8,7 +8,7 @@ bool XDemux::open(const char *url)
     av_dict_set(&opt, "max_delay", "500",0);
 
     mux.lock();
-
+    ic = avformat_alloc_context();
     int re = avformat_open_input(&ic, url, nullptr, &opt);
     if(re != 0)
     {

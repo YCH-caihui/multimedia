@@ -73,6 +73,9 @@ AVFrame* XDecode::recv()
      mux.unlock();
     if(re != 0)
     {
+        char buf[1024] = {0};
+        av_strerror(re, buf, sizeof(buf) - 1);
+        std::cout << "decode failed:" << buf << std::endl;
         av_frame_free(&frame);
         return nullptr;
     }
