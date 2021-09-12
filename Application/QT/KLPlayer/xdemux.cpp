@@ -15,7 +15,7 @@ bool XDemux::open(const char *url)
         mux.unlock();
         char buf[1024] = {0};
         av_strerror(re, buf, sizeof(buf) - 1);
-        cout << "Open  " << url << "  failed" << endl;
+        cout << "Open  " << url << "  failed:" << buf <<  endl;
         return false;
     }
     cout << "open  " << url << " Success !" << endl;
@@ -30,7 +30,10 @@ bool XDemux::open(const char *url)
         return false;
     }
 
-    int totalMs = ic->duration / (AV_TIME_BASE / 1000);
+    totalMs = ic->duration / (AV_TIME_BASE / 1000);
+    AVStream * asv = ic->streams[videoStream];
+    width = asv->codecpar->width;
+    height = asv->codecpar->height;
     cout << "totalMs = " << totalMs << endl;
 
     av_dump_format(ic, 0, url, 0);
@@ -65,6 +68,7 @@ AVPacket * XDemux::read()
         return nullptr;
     }
 
+    //时间转换
     pkt->pts = pkt->pts * (1000 *(r2d(ic->streams[pkt->stream_index]->time_base)));
     pkt->dts = pkt->dts * (1000 * (r2d(ic->streams[pkt->stream_index]->time_base)));
 

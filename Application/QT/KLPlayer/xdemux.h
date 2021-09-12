@@ -22,6 +22,10 @@ protected:
     int videoStream = 0;
     int audioStream = 1;
 public:
+    int width = 0;
+    int height = 0;
+     //媒体总时长 ms
+    int totalMs = 0;
     //打开媒体文件，或者流媒体rtmp http rstp
     virtual bool open(const char * url);
 
