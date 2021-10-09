@@ -13,7 +13,7 @@ include_directories(${CV_INCLUDE_DIRS})
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-LINK_DIRECTORIES("/Users/ych-caihui/Documents/Develop/Code/MediaCode/multimedia/Opencv/cvlib/pc/lib")
+LINK_DIRECTORIES("../../../../Opencv/cvlib/pc/lib")
 
 
 add_executable(CVInstallTest main.cpp)
