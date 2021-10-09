@@ -167,6 +167,18 @@ void XDemux::close()
 
 XDemux::XDemux()
 {
+    static bool isFirst = true;
+    static std::mutex dmux;
+    dmux.lock();
+    if(isFirst)
+    {
+       //初始化封装库
+        //av_register_all();
+        //初始化网路库（可以打开rtsp rtmp  http协议的流媒体视频）
+        avformat_network_init();
+        isFirst = false;
+    }
+   dmux.unlock();
 
 }
 

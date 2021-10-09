@@ -27,12 +27,14 @@ SOURCES += \
     mainwindow.cpp \
     xdecode.cpp \
     xdemux.cpp \
+    xresample.cpp \
     xvideowidget.cpp
 
 HEADERS += \
     mainwindow.h \
     xdecode.h \
     xdemux.h \
+    xresample.h \
     xvideowidget.h
 
 FORMS += \
