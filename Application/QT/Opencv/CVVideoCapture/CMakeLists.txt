@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(CVVideoCapture LANGUAGES CXX)
+
+set(ENV{PKG_CONFIG_PATH} ../../../../Opencv/cvlib/pc/lib/pkgconfig)
+
+find_package(PkgConfig)
+
+pkg_search_module(CV REQUIRED opencv)
+
+include_directories(${CV_INCLUDE_DIRS})
+
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+LINK_DIRECTORIES("../../../../Opencv/cvlib/pc/lib")
+
+
+add_executable(CVVideoCapture main.cpp)
+
+
+target_link_libraries(CVVideoCapture ${CV_LDFLAGS})
